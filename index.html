@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: 'PT Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p 
+      v-for="item in list"
+      :key="item"
+    >
+      {{ item }}
+    </p>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        list: []
+      },
+      created() {
+        this.fill()
+      },
+      methods: {
+        generate() {
+          let password = ''
+
+          const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+          for (let i = 0; i < 32; i++) {
+            password += charset.charAt(Math.floor(Math.random() * charset.length))
+          }
+
+          return password
+        },
+        fill() {
+          this.list = new Array(10).fill(1).map(() => this.generate())
+        }
+      }
+    })
+    
+  </script>
+</body>
+</html>
